@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copy app.jar and sentry-agent.jar from builder stage
-COPY --from=builder /app/target/analytics-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/galiaf-*.jar app.jar
 COPY --from=builder /app/sentry-agent.jar sentry-agent.jar
 
 EXPOSE 8080
