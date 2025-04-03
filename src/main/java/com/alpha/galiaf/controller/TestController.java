@@ -12,7 +12,7 @@ public class TestController {
         try {
             throw new Exception("🚨 This is a test exception for Sentry");
         } catch (Exception e) {
-            Sentry.captureException(e); // Отправка исключения в Sentry
+            Sentry.captureException(e);
         }
 
         return "Test exception sent to Sentry (if configured correctly)";
