@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copy app.jar and sentry-agent.jar from builder stage
-COPY --from=builder /app/target/galiaf-1.0.2.jar app.jar
+COPY --from=builder /app/target/galiaf-1.0.3.jar app.jar
 COPY --from=builder /app/target/sentry-agent.jar sentry-agent.jar
 COPY sentry.agent.yaml /app/sentry.agent.yaml
 

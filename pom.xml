@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.alpha</groupId>
 	<artifactId>galiaf</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>galiaf</name>
 	<description>Spring Boot</description>
 	<url/>
