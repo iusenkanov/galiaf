@@ -1,0 +1,6 @@
+[auth]
+auth-token=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
+
+[defaults]
+org=bckg
+project=java-spring-boot

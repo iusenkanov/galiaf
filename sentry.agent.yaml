@@ -1,0 +1,37 @@
+# sentry.agent.yaml
+
+# Use production DSN or use env SENTRY_DSN
+dsn: https://a3730c176137847d3dea63b5b0fa9447@o4509091708928000.ingest.us.sentry.io/4509091710042112
+
+environment: production
+release: test@1.0.1
+
+# Show code context around the exception line
+attach-stacktrace: true
+include-source-context: true
+context-lines: 5
+
+# Helps mark your own packages in stacktrace
+stacktrace:
+  app-packages:
+    - com.alpha.galiaf
+
+# Optional: remove or modify sensitive data
+before-send: |
+  function(event, hint) {
+    if (event.request && event.request.headers) {
+      delete event.request.headers['authorization'];
+      delete event.request.headers['cookie'];
+    }
+
+    if (event.exception && event.exception.values) {
+      for (var i = 0; i < event.exception.values.length; i++) {
+        if (event.exception.values[i].value &&
+            event.exception.values[i].value.includes('password')) {
+          event.exception.values[i].value = '[Filtered password]';
+        }
+      }
+    }
+
+    return event;
+  }

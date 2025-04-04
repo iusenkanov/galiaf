@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/sentry-test")
+
     public String sentryTest() {
         try {
             throw new Exception("🚨 This is a test exception for Sentry");
