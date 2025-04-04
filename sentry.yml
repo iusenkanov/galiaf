@@ -1,0 +1,11 @@
+traces-sample-rate: 1.0
+release: galiaf@1.0.3
+before-send: |
+  def before_send(event, hint):
+      for ex in event.get("exception", {}).get("values", []):
+          for frame in ex.get("stacktrace", {}).get("frames", []):
+              filename = frame.get("filename", "")
+              if filename == "TestController.java":
+                  frame["filename"] = "src/main/java/com/alpha/galiaf/controller/TestController.java"
+                  frame["abs_path"] = "src/main/java/com/alpha/galiaf/controller/TestController.java"
+      return event
