@@ -1,0 +1,9 @@
+image:
+  repository: ghcr.io/iusenkanov/galiaf
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+createNamespace: true

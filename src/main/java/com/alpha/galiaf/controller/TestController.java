@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/sentry-test")
-
     public String sentryTest() {
+        int x = 5;
+        int y = 10;
+        int z = x + y;
+
+        System.out.println("z = " + z);
+
         try {
             throw new Exception("🚨 This is a test exception for Sentry");
         } catch (Exception e) {
@@ -19,3 +24,6 @@ public class TestController {
         return "Test exception sent to Sentry (if configured correctly)";
     }
 }
+
+//sdfdsfdsf
+//asdfsdfsdf
