@@ -17,7 +17,7 @@ spec:
         - name: galiaf
           image: ghcr.io/your-org/galiaf:a
           ports:
-            - containerPort: 8080
+            - containerPort: 8090
           env:
             - name: SENTRY_RELEASE
               value: "1.0.4"
