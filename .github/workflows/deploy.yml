@@ -9,7 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: iusenkanov/galiaf
-  RELEASE_VERSION: ${{ github.sha }}
+  RELEASE_VERSION: galiaf-${{ github.sha }}
 
 jobs:
   build-and-push:
