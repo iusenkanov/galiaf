@@ -24,6 +24,3 @@ public class TestController {
         return "Test exception sent to Sentry (if configured correctly)";
     }
 }
-
-//sdfdsfdsf
-//asdfsdfsdf
