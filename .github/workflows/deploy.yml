@@ -24,17 +24,11 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Create and Upload Sentry Release
+      - name: Build + Upload Source Bundle to Sentry
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: Kodif
-          SENTRY_PROJECT: kodif-analytics
-          RELEASE_VERSION: ${{ github.sha }}
-        run: |
-          npm install -g @sentry/cli
-          sentry-cli releases new "$RELEASE_VERSION"
-          sentry-cli releases set-commits --auto "$RELEASE_VERSION"
-          sentry-cli releases finalize "$RELEASE_VERSION"
+          SENTRY_RELEASE: ${{ github.sha }}
+        run: mvn clean install
 
       - name: Log in to GHCR
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
