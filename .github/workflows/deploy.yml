@@ -41,6 +41,3 @@ jobs:
         run: |
           docker push $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION
           docker push $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST
-
-      - name: Upload source bundle
-        run: mvn uploadSourceBundle -DRELEASE_VERSION=$RELEASE_VERSION
