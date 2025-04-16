@@ -100,7 +100,6 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>uploadSourceBundle</goal>
 							<goal>validateSdkDependencyVersions</goal>
 						</goals>
 					</execution>
