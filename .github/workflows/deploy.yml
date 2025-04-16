@@ -27,8 +27,8 @@ jobs:
       - name: Create and Upload Sentry Release
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: Kodif
-          SENTRY_PROJECT: kodif-analytics
+          SENTRY_ORG: "Kodif"
+          SENTRY_PROJECT: "kodif-analytics"
           RELEASE_VERSION: ${{ github.sha }}
         run: |
           npm install -g @sentry/cli
