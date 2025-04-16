@@ -33,7 +33,7 @@ jobs:
         run: |
           npm install -g @sentry/cli
           sentry-cli releases new "$RELEASE_VERSION"
-          sentry-cli releases set-commits --auto "$RELEASE_VERSION"
+          sentry-cli releases set-commits --auto "$RELEASE_VERSION" --ignore-missing
           sentry-cli releases finalize "$RELEASE_VERSION"
 
 
