@@ -9,10 +9,6 @@ RUN mvn dependency:go-offline
 
 COPY src ./src
 
-# Define a build-time variable for the Sentry release.
-ARG SENTRY_RELEASE=dev
-ENV SENTRY_RELEASE=$SENTRY_RELEASE
-
 # Build application JAR
 RUN mvn clean package -DskipTests
 
@@ -22,6 +18,10 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
+
+# Define a build-time variable for the Sentry release.
+ARG SENTRY_RELEASE=dev
+ENV SENTRY_RELEASE=$SENTRY_RELEASE
 
 EXPOSE 8080
 
