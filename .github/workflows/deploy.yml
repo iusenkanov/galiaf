@@ -11,8 +11,8 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: iusenkanov/leonardo
-      SENTRY_ORG: your-org
-      SENTRY_PROJECT: your-project
+      SENTRY_ORG: bckg
+      SENTRY_PROJECT: galiaf
 
     steps:
       - name: Checkout
