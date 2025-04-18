@@ -76,10 +76,3 @@ jobs:
           docker push $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION
           docker push $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST
 
-      - name: Notify Sentry of Release
-        uses: getsentry/action-release@v1
-        with:
-          environment: dev
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_RELEASE: ${{ env.RELEASE_FULL }}
