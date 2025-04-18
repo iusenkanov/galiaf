@@ -3,9 +3,8 @@ FROM maven:3.9.4-eclipse-temurin-21 AS builder
 
 WORKDIR /app
 
-ARG SENTRY_RELEASE
+
 ARG DEBUG_ID
-ENV SENTRY_RELEASE=$SENTRY_RELEASE
 ENV DEBUG_ID=$DEBUG_ID
 
 # Copy pom.xml first to cache dependencies
