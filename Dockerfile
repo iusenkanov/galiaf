@@ -3,14 +3,15 @@ FROM maven:3.9.4-eclipse-temurin-21 AS builder
 
 WORKDIR /app
 
-ARG SENTRY_RELEASE
-ENV SENTRY_RELEASE=$SENTRY_RELEASE
-
 # Copy pom.xml first to cache dependencies
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
 COPY src ./src
+
+# Define a build-time variable for the Sentry release.
+ARG SENTRY_RELEASE=dev
+ENV SENTRY_RELEASE=$SENTRY_RELEASE
 
 # Build application JAR
 RUN mvn clean package -DskipTests
