@@ -20,7 +20,6 @@ public class TestController {
         } catch (Exception e) {
             Sentry.captureException(e);
         }
-
-        return "Test exception sent to Sentry (if configured correctly)";
+        return "Test exception sent to Sentry (if configured correctly)" ;
     }
 }
