@@ -38,6 +38,8 @@ jobs:
         run: ./mvnw clean package -DskipTests
 
       - name: Create Sentry debug bundle
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
           mkdir -p sentry-bundle
           sentry-cli debug-files bundle-jvm \
