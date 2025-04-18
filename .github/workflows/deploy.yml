@@ -26,6 +26,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Install sentry-cli
+        run: |
+          curl -sL https://sentry.io/get-cli/ | bash
+
       - name: Generate debug ID
         id: debug_id
         run: echo "DEBUG_ID=$(uuidgen)" >> $GITHUB_ENV
