@@ -10,7 +10,7 @@ public class GaliafApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GaliafApplication.class, args);
 		Sentry.init(options -> {
-			System.out.println("SENTRY_RELEASE: " + System.getenv("SENTRY_RELEASE"));
+			System.out.println("SENTRY_RELEASE: " + options.getRelease());
 		});
 		Sentry.captureMessage("✅ Test log from Spring Boot main method (integration check)");
 	}
