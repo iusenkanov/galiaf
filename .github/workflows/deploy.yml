@@ -1,63 +1,65 @@
-name: Build and Push to GHCR
+name: Build and Push with Sentry
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: iusenkanov/galiaf
+    branches: [main]
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
+
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: iusenkanov/leonardo
+      SENTRY_ORG: your-org
+      SENTRY_PROJECT: your-project
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Set up Java 21
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: temurin
           java-version: '21'
+          distribution: 'temurin'
 
-      - name: Log in to GHCR
-        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Generate debug ID
+        id: debug_id
+        run: echo "DEBUG_ID=$(uuidgen)" >> $GITHUB_ENV
 
-      - name: Set image tag(s)
+      - name: Build with Maven
+        run: ./mvnw clean package -DskipTests
+
+      - name: Create Sentry debug bundle
         run: |
-          echo "RELEASE_VERSION=${GITHUB_SHA::7}" >> $GITHUB_ENV
-          echo "RELEASE_FULL=${GITHUB_SHA}" >> $GITHUB_ENV
-          echo "IMAGE_LATEST=latest" >> $GITHUB_ENV
+          mkdir -p sentry-bundle
+          sentry-cli debug-files bundle-jvm \
+            --output sentry-bundle \
+            --debug-id $DEBUG_ID \
+            target/classes
 
-      - name: Build Docker image
-        run: |
-          docker build -t $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION \
-                       -t $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST .
-
-      - name: Push Docker image
-        run: |
-          docker push $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION
-          docker push $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST
-
-      - name: Notify Sentry of Release
-        uses: getsentry/action-release@v1
-        with:
-          environment: dev
+      - name: Upload Sentry debug bundle
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: bckg
-          SENTRY_PROJECT: galiaf
-          SENTRY_RELEASE: ${{ env.RELEASE_FULL }}
-
-      - name: Get debug_id from Sentry
         run: |
-          DEBUG_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.SENTRY_AUTH_TOKEN }}" \
-            "https://sentry.io/api/0/projects/bckg/galiaf/files/difs/" \
-            | jq -r '.[] | select(.headers."debug-id" != null and .headers."sentry-release" == env.RELEASE_FULL) | .headers."debug-id"' | head -n1)
-            
-          echo "DEBUG_ID=$DEBUG_ID" >> $GITHUB_ENV
+          sentry-cli debug-files upload \
+            --org $SENTRY_ORG \
+            --project $SENTRY_PROJECT \
+            --type jvm sentry-bundle
+
+      - name: Set IMAGE_TAG
+        run: echo "IMAGE_TAG=${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Build & Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/leonardo:${{ env.IMAGE_TAG }}
+            ghcr.io/${{ github.repository_owner }}/leonardo:latest
+          build-args: |
+            SENTRY_DEBUG_ID=${{ env.DEBUG_ID }}
