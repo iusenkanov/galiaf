@@ -67,7 +67,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build  --build-arg SENTRY_RELEASE=${{ env.SENTRY_RELEASE }} \
+          docker build --build-arg SENTRY_RELEASE=${{ env.RELEASE_FULL }} \
                  -t $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION \
                  -t $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST .
 
