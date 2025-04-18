@@ -68,6 +68,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build --build-arg DEBUG_ID=${{ env.COMMIT_SHORT_SHA }} \
+                       --build-arg SENTRY_RELEASE=${{ env.COMMIT_SHORT_SHA }} \
                  -t $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION \
                  -t $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST .
 

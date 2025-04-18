@@ -9,6 +9,10 @@ public class GaliafApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GaliafApplication.class, args);
+		Sentry.init(options -> {
+			options.setRelease("${{ github.sha }}");
+			options.addBundleId(System.getenv("DEBUG_ID"));
+		});
 		Sentry.captureMessage("✅ Test log from Spring Boot main method (integration check)");
 	}
 
