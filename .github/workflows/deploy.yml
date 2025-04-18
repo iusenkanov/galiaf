@@ -11,6 +11,8 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: iusenkanov/leonardo
+      SENTRY_ORG: bckg
+      SENTRY_PROJECT: galiaf
 
     steps:
       - name: Checkout
@@ -46,8 +48,6 @@ jobs:
       - name: Upload Sentry debug bundle
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: bckg
-          SENTRY_PROJECT: galiaf
         run: |
           sentry-cli debug-files upload \
             --org $SENTRY_ORG \
