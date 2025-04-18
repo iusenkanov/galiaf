@@ -67,7 +67,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build --build-arg SENTRY_RELEASE=${{ env.RELEASE_FULL }} \
+          docker build --build-arg SENTRY_RELEASE=${GITHUB_SHA} \
                  -t $REGISTRY/$IMAGE_NAME:$RELEASE_VERSION \
                  -t $REGISTRY/$IMAGE_NAME:$IMAGE_LATEST .
 
