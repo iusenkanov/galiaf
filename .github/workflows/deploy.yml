@@ -49,4 +49,4 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: bckg
           SENTRY_PROJECT: galiaf
-          SENTRY_RELEASE: ${{ env.RELEASE_VERSION }}
+          SENTRY_RELEASE: ${GITHUB_SHA}
