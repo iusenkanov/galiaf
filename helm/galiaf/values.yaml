@@ -1,3 +1,4 @@
+replicaCount: 1
 image:
   repository: ghcr.io/iusenkanov/galiaf
   tag: "latest"
@@ -6,5 +7,3 @@ service:
   type: NodePort
   port: 8090
   nodePort: 30080
-
-createNamespace: false
