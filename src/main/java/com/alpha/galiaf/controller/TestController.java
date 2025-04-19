@@ -12,9 +12,7 @@ public class TestController {
         int x = 5;
         int y = 10;
         int z = x + y;
-
         System.out.println("z = " + z);
-
         try {
             throw new Exception("🚨 This is a test exception for Sentry");
         } catch (Exception e) {
