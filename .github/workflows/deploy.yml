@@ -35,35 +35,8 @@ jobs:
           echo "RELEASE_VERSION=${GITHUB_SHA::7}" >> $GITHUB_ENV
           echo "IMAGE_LATEST=latest" >> $GITHUB_ENV
 
-#      - name: Install sentry-cli
-#        run: |
-#          curl -sL https://sentry.io/get-cli/ | bash
-
-#      - name: Generate debug ID
-#        id: debug_id
-#        run: echo "DEBUG_ID=$(uuidgen)" >> $GITHUB_ENV
-
       - name: Build with Maven
         run: ./mvnw clean package -DskipTests
-
-#      - name: Create Sentry debug bundle
-#        env:
-#          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-#        run: |
-#          mkdir -p sentry-bundle
-#          sentry-cli debug-files bundle-jvm \
-#            --output sentry-bundle \
-#            --debug-id $DEBUG_ID \
-#            target/classes
-#
-#      - name: Upload Sentry debug bundle
-#        env:
-#          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-#        run: |
-#          sentry-cli debug-files upload \
-#            --org $SENTRY_ORG \
-#            --project $SENTRY_PROJECT \
-#            --type jvm sentry-bundle
 
       - name: Build Docker image
         run: |
