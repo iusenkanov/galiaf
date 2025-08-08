@@ -11,5 +11,4 @@ public class GaliafApplication {
 		SpringApplication.run(GaliafApplication.class, args);
 		Sentry.captureMessage("✅ Test log from Spring Boot main method (integration check)");
 	}
-
 }

@@ -7,17 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @GetMapping("/sentry-test")
-    public String sentryTest() {
-        int x = 5;
-        int y = 10;
-        int z = x + y;
-        System.out.println("z = " + z);
-        try {
-            throw new Exception("🚨 This is a test exception for Sentry");
-        } catch (Exception e) {
-            Sentry.captureException(e);
-        }
-        return "Test exception sent to Sentry (if configured correctly)" ;
+@GetMapping("/sentry-test")
+public String sentryTest() {
+    try {
+        throw new RuntimeException("🚨 This is a test exception for Sentry");
+    } catch (Exception e) {
+        Sentry.captureException(e); 
+        throw e; 
     }
+}
 }
