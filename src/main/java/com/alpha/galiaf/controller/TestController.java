@@ -16,4 +16,13 @@ public String sentryTest() {
         throw e; 
     }
 }
+    @GetMapping("/sentry-test3")
+    public String sentryTest3() {
+        try {
+            throw new RuntimeException("new sentry error version 3");
+        } catch (Exception e) {
+            Sentry.captureException(e);
+            throw e;
+        }
+    }
 }

@@ -97,7 +97,7 @@
 					<project>galiaf</project>
 					<!-- BcKg -->
 					<authToken>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</authToken>
-					<!-- Kodig -->
+					<!-- Kodif -->
 					<!--<authToken>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</authToken>-->
 				</configuration>
 				<executions>
