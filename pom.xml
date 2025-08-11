@@ -82,11 +82,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>io.sentry</groupId>
-				<artifactId>sentry-maven-plugin</artifactId>
-				<version>0.4.0</version>
-				<extensions>true</extensions>
+<!--			<plugin>-->
+<!--				<groupId>io.sentry</groupId>-->
+<!--				<artifactId>sentry-maven-plugin</artifactId>-->
+<!--				<version>0.4.0</version>-->
+<!--				<extensions>true</extensions>-->
 <!--				<configuration>-->
 <!--					<debugSentryCli>true</debugSentryCli>-->
 <!--					<skip>false</skip>-->
@@ -100,15 +100,15 @@
 <!--					&lt;!&ndash; Kodif &ndash;&gt;-->
 <!--					&lt;!&ndash;<authToken>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</authToken>&ndash;&gt;-->
 <!--				</configuration>-->
-				<executions>
-					<execution>
-						<goals>
-							<goal>uploadSourceBundle</goal>
-							<goal>validateSdkDependencyVersions</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>uploadSourceBundle</goal>-->
+<!--							<goal>validateSdkDependencyVersions</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 </project>

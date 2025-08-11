@@ -45,6 +45,10 @@ jobs:
           print(f"DEBUG_ID={uuid.uuid5(uuid.NAMESPACE_DNS, os.environ['GITHUB_SHA'])}")
           PY
 
+      - name: Build with Maven
+        run: ./mvnw -B clean package -DskipTests
+
+      # ВАРИАНТ A: дать Java SDK знать bundle-id через ресурс (без плагинов)
       - name: Inject sentry-debug-meta.properties
         run: |
           mkdir -p src/main/resources
@@ -52,10 +56,7 @@ jobs:
           io.sentry.bundle-ids=${DEBUG_ID}
           EOF
 
-      - name: Build with Maven
-        run: ./mvnw -B clean package -DskipTests
-
-      - name: Bundle JVM sources
+      - name: Bundle JVM sources (sentry-cli)
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
@@ -65,13 +66,13 @@ jobs:
             --debug-id "$DEBUG_ID" \
             ./src/main/java
 
-      - name: Upload source bundle to Sentry
+      - name: Upload source bundle to Sentry (sentry-cli)
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
           sentry-cli debug-files upload --type jvm build/sentry-bundle
 
-      - name: Create/Finalize Sentry Release
+      - name: Create/Finalize Sentry Release (sentry-cli)
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
