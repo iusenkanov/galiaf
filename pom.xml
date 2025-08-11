@@ -82,33 +82,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>io.sentry</groupId>-->
-<!--				<artifactId>sentry-maven-plugin</artifactId>-->
-<!--				<version>0.4.0</version>-->
-<!--				<extensions>true</extensions>-->
-<!--				<configuration>-->
-<!--					<debugSentryCli>true</debugSentryCli>-->
-<!--					<skip>false</skip>-->
-<!--					<skipSourceBundle>false</skipSourceBundle>-->
-<!--					<skipAutoInstall>false</skipAutoInstall>-->
-<!--					<skipValidateSdkDependencyVersions>false</skipValidateSdkDependencyVersions>-->
-<!--					<org>bckg</org>-->
-<!--					<project>galiaf</project>-->
-<!--					&lt;!&ndash; BcKg &ndash;&gt;-->
-<!--					&lt;!&ndash;<authToken>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</authToken>&ndash;&gt;-->
-<!--					&lt;!&ndash; Kodif &ndash;&gt;-->
-<!--					&lt;!&ndash;<authToken>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</authToken>&ndash;&gt;-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<goals>-->
-<!--							<goal>uploadSourceBundle</goal>-->
-<!--							<goal>validateSdkDependencyVersions</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>io.sentry</groupId>
+				<artifactId>sentry-maven-plugin</artifactId>
+				<version>0.4.0</version>
+				<extensions>true</extensions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

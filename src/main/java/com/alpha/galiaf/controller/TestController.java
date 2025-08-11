@@ -1,5 +1,6 @@
 package com.alpha.galiaf.controller;
 
+
 import io.sentry.Sentry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ public String sentryTest() {
     try {
         throw new RuntimeException("🚨 This is a test exception for Sentry");
     } catch (Exception e) {
-        Sentry.captureException(e); 
+        Sentry.captureException(e);
         throw e; 
     }
 }
