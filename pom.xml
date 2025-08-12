@@ -86,7 +86,6 @@
 				<groupId>io.sentry</groupId>
 				<artifactId>sentry-maven-plugin</artifactId>
 				<version>0.4.0</version>
-				<extensions>true</extensions>
 			</plugin>
 		</plugins>
 	</build>
